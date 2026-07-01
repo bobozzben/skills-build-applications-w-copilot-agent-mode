@@ -1,23 +1,36 @@
 import express from 'express'
-import mongoose from 'mongoose'
+import usersRouter from './routes/users.ts'
+import teamsRouter from './routes/teams.ts'
+import activitiesRouter from './routes/activities.ts'
+import leaderboardRouter from './routes/leaderboard.ts'
+import workoutsRouter from './routes/workouts.ts'
+import { connectDatabase } from './config/database.ts'
 
 const app = express()
 const PORT = parseInt(process.env.PORT ?? '8000', 10)
-const MONGO_URL = process.env.MONGO_URL ?? 'mongodb://127.0.0.1:27017/octofit-tracker'
+const CODESPACE_NAME = process.env.CODESPACE_NAME
+const BASE_URL = CODESPACE_NAME
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
+  : `http://localhost:${PORT}`
 
 app.use(express.json())
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'OctoFit Tracker backend is running' })
+  res.json({ message: 'OctoFit Tracker backend is running', baseUrl: BASE_URL })
 })
+
+app.use('/api/users', usersRouter)
+app.use('/api/teams', teamsRouter)
+app.use('/api/activities', activitiesRouter)
+app.use('/api/leaderboard', leaderboardRouter)
+app.use('/api/workouts', workoutsRouter)
 
 app.listen(PORT, async () => {
   try {
-    await mongoose.connect(MONGO_URL)
-    console.log(`Connected to MongoDB at ${MONGO_URL}`)
+    await connectDatabase()
   } catch (error) {
     console.error('MongoDB connection failed:', error)
   }
 
-  console.log(`Backend server listening on http://localhost:${PORT}`)
+  console.log(`Backend server listening on ${BASE_URL}`)
 })
