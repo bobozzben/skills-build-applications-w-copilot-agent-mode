@@ -1,10 +1,10 @@
 import express from 'express'
-import usersRouter from './routes/users.ts'
-import teamsRouter from './routes/teams.ts'
-import activitiesRouter from './routes/activities.ts'
-import leaderboardRouter from './routes/leaderboard.ts'
-import workoutsRouter from './routes/workouts.ts'
-import { connectDatabase } from './config/database.ts'
+import usersRouter from './routes/users.js'
+import teamsRouter from './routes/teams.js'
+import activitiesRouter from './routes/activities.js'
+import leaderboardRouter from './routes/leaderboard.js'
+import workoutsRouter from './routes/workouts.js'
+import { connectDatabase } from './config/database.js'
 
 const app = express()
 const PORT = parseInt(process.env.PORT ?? '8000', 10)

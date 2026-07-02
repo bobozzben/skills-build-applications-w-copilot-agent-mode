@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import Team from '../models/team.ts'
+import Team from '../models/team.js'
 
 const router = Router()
 

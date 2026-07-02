@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-import User from '../models/user.ts'
-import Team from '../models/team.ts'
-import Activity from '../models/activity.ts'
-import Workout from '../models/workout.ts'
-import LeaderboardEntry from '../models/leaderboard.ts'
+import User from '../models/user.js'
+import Team from '../models/team.js'
+import Activity from '../models/activity.js'
+import Workout from '../models/workout.js'
+import LeaderboardEntry from '../models/leaderboard.js'
 
 // Seed the octofit_db database with test data
 const MONGO_URL = process.env.MONGO_URL ?? 'mongodb://127.0.0.1:27017/octofit_db'
